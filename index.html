@@ -17,8 +17,13 @@
         .question-text { flex-grow: 1; }
         .radio-group { display: flex; justify-content: space-around; min-width: 200px; }
         .total-score-container { background-color: #f1f1f1; padding: 1rem; border-radius: 8px; }
-        label { margin-bottom: 0; }
+        label { margin-bottom: 0.5rem; font-weight: 500;}
         .form-control[readonly] { background-color: #e9ecef; }
+        /* --- แก้ไข: เพิ่มสไตล์สำหรับจัดวางข้อมูล --- */
+        .info-grid { border: 1px solid #dee2e6; padding: 1rem; border-radius: 5px; height: 100%; }
+        .info-grid .form-group { margin-bottom: 0.5rem; }
+        .info-grid label { font-size: 0.9em; color: #6c757d; }
+        .info-grid input { border: none; background-color: transparent !important; padding-left: 0; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -34,33 +39,47 @@
             <div id="userInfoSection">
                 <h5 class="section-title">ข้อมูลผู้ประเมิน</h5>
                 <div class="alert alert-info" id="loading-alert">กำลังตรวจสอบข้อมูลการลงทะเบียน...</div>
+                
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="fullName">ชื่อ-สกุลผู้ลงทะเบียน</label>
-                        <input type="text" class="form-control" id="fullName" name="ชื่อ-สกุล" required>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label for="fullName">ชื่อ-สกุลผู้ลงทะเบียน</label>
+                            <input type="text" class="form-control" id="fullName" name="ชื่อ-สกุล" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="shopName">ชื่อร้านเสริมสวย/บาร์เบอร์</label>
+                            <input type="text" class="form-control" id="shopName" name="ชื่อร้าน" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventLocation">สถานที่จัดงาน</label>
+                            <input type="text" class="form-control" id="eventLocation" name="สถานที่จัดงาน" required>
+                        </div>
+                         <div class="form-group">
+                            <label for="memo">Memo</label>
+                            <input type="text" class="form-control" id="memo" name="Memo" required>
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="phone">เบอร์โทร</label>
-                        <input type="text" class="form-control" id="phone" name="เบอร์โทร" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="shopName">ชื่อร้านเสริมสวย/บาร์เบอร์</label>
-                        <input type="text" class="form-control" id="shopName" name="ชื่อร้าน" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="province">จังหวัด</label>
-                        <input type="text" class="form-control" id="province" name="จังหวัด" required>
-                    </div>
-                     <div class="form-group col-md-6">
-                        <label for="status">สถานะ</label>
-                        <input type="text" class="form-control" id="status" name="สถานะ" required>
+                    <div class="col-md-5">
+                       <div class="info-grid">
+                            <div class="form-group">
+                                <label for="phone">เบอร์โทร</label>
+                                <input type="text" class="form-control" id="phone" name="เบอร์โทร" required>
+                            </div>
+                             <div class="form-group">
+                                <label for="province">จังหวัด</label>
+                                <input type="text" class="form-control" id="province" name="จังหวัด" required>
+                            </div>
+                             <div class="form-group">
+                                <label for="status">สถานะ</label>
+                                <input type="text" class="form-control" id="status" name="สถานะ" required>
+                            </div>
+                       </div>
                     </div>
                 </div>
             </div>
-
             <div id="evaluationQuestions">
                 <h5 class="section-title">1. ความพร้อมของการเข้าร่วมงาน WORKSHOP</h5>
-                <div class="question-row">
+                 <div class="question-row">
                     <div class="question-text">1.1 ระยะเวลาที่ได้รับการติดต่อ / โทรศัพท์เชิญ / ข่าวสารให้มาร่วมงาน</div>
                     <div class="radio-group">
                         <label><input type="radio" name="q1_1" value="5" required> 5</label>
@@ -238,7 +257,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     // **สำคัญ:** ใช้ URL ที่ได้จากการ Deploy ของคุณ
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyTkAc5YegxzlvBYIYscQHVVGJdx49U8puiXrAbXsZXP6sQL6vfahEQeKFMQLzNakmG/exec'; 
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzJlttEf59mN6o2llY0igHkvUhB3u0NvVz2l4wMIruJ2_sIZ0D2zK2xsqa9y-sX01c/exec'; 
     const form = document.forms['evaluation-sheet'];
 
     async function main() {
@@ -262,16 +281,22 @@
             .then(data => {
                 const loadingAlert = document.getElementById('loading-alert');
                 if (data.found) {
+                    // --- แก้ไข: เพิ่มการดึงข้อมูล eventLocation และ memo ---
                     $('#fullName').val(data.fullName).prop('readonly', true);
                     $('#phone').val(data.phone).prop('readonly', true);
                     $('#shopName').val(data.shopName).prop('readonly', true);
                     $('#province').val(data.province).prop('readonly', true);
                     $('#status').val(data.status).prop('readonly', true);
+                    $('#eventLocation').val(data.eventLocation).prop('readonly', true);
+                    $('#memo').val(data.memo).prop('readonly', true);
+                    // ----------------------------------------------------
                     loadingAlert.className = 'alert alert-success';
                     loadingAlert.textContent = 'พบข้อมูลการลงทะเบียนของคุณแล้ว';
                 } else {
                     loadingAlert.className = 'alert alert-warning';
                     loadingAlert.textContent = 'ไม่พบข้อมูลการลงทะเบียน กรุณากรอกข้อมูลผู้ประเมิน';
+                    // ทำให้ช่อง readonly กลายเป็นช่องปกติ
+                    $('#eventLocation, #memo').prop('readonly', false);
                 }
             })
             .catch(err => {
@@ -333,5 +358,4 @@
 </script>
 
 </body>
-
 </html>
