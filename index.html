@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCIC-Evaluation</title>
+    <title>แบบฟอร์มประเมินผล</title>
     
     <link rel="icon" type="image/png" href="https://img5.pic.in.th/file/secure-sv1/-72f36e2606e6a703c.png">
     
@@ -22,8 +22,15 @@
         .container { max-width: 800px; }
         .form-container { background-color: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); margin-top: 2rem; border-top: 5px solid var(--primary-color); }
         
-        .logo-container { text-align: center; margin-bottom: 1.5rem; }
-        .logo-img { max-width: 150px; height: auto; }
+        /* ======================= 2. เพิ่มโค้ด CSS สำหรับโลโก้ ======================= */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .logo-img {
+            max-width: 150px; /* ปรับขนาดโลโก้ได้ตามต้องการ */
+            height: auto;
+        }
 
         .form-title { text-align: center; font-weight: 700; margin-bottom: 2rem; color: #333; }
         .section-title { font-weight: 700; background-color: var(--section-bg); padding: 0.75rem 1.25rem; border-radius: 8px; margin-top: 2.5rem; border-left: 4px solid var(--primary-color); }
@@ -50,41 +57,6 @@
 
         .mobile-rating-label { display: none; }
 
-        /* =========== CSS สำหรับหน้าต่าง Loading (ใหม่) =========== */
-        #loadingOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 9999;
-            display: none; /* ซ่อนไว้ก่อน */
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: white;
-            text-align: center;
-        }
-        .spinner {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid var(--primary-color);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        #loadingText {
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
-        /* ========================================================== */
-
         @media (max-width: 576px) {
             .form-container { padding: 1.5rem; }
             .rating-header { display: none; }
@@ -99,10 +71,6 @@
 </head>
 <body>
 
-<div id="loadingOverlay">
-    <div class="spinner"></div>
-    <div id="loadingText">กำลังประมวลผลไฟล์...</div>
-</div>
 <div class="container">
     <div class="form-container">
 
@@ -186,7 +154,7 @@
 
                 <h5 class="section-title">3. เทคนิคการนำเสนอของวิทยากร การสอนสด</h5>
                  <div class="rating-grid">
-                        <div class="rating-row">
+                     <div class="rating-row">
                         <div class="rating-question">3.1 เทคนิคดีดี วิทยากรนำเสนอเนื้อหาสาระครบถ้วนและน่าสนใจ</div>
                         <div class="rating-options">
                             <div class="col"><input type="radio" name="q3_1" value="5" required><span class="mobile-rating-label">มากที่สุด (5)</span></div>
@@ -197,12 +165,12 @@
                     <div class="rating-row">
                         <div class="rating-question">3.2 เอกสารประกอบการสอนของวิทยากร สื่อสิ่งพิมพ์ / สื่อโซเชียล</div>
                         <div class="rating-options">
-                                <div class="col"><input type="radio" name="q3_2" value="5" required><span class="mobile-rating-label">มากที่สุด (5)</span></div>
+                             <div class="col"><input type="radio" name="q3_2" value="5" required><span class="mobile-rating-label">มากที่สุด (5)</span></div>
                             <div class="col"><input type="radio" name="q3_2" value="3"><span class="mobile-rating-label">ปานกลาง (3)</span></div>
                             <div class="col"><input type="radio" name="q3_2" value="1"><span class="mobile-rating-label">น้อยที่สุด (1)</span></div>
                         </div>
                     </div>
-                       <div class="rating-row">
+                     <div class="rating-row">
                         <div class="rating-question">3.3 การบริหารเวลาของวิทยากรในการสอน</div>
                         <div class="rating-options">
                            <div class="col"><input type="radio" name="q3_3" value="5" required><span class="mobile-rating-label">มากที่สุด (5)</span></div>
@@ -210,7 +178,7 @@
                             <div class="col"><input type="radio" name="q3_3" value="1"><span class="mobile-rating-label">น้อยที่สุด (1)</span></div>
                         </div>
                     </div>
-                       <div class="rating-row">
+                     <div class="rating-row">
                         <div class="rating-question">3.4 วิทยากรสาธิต ผลลัพธ์ของสีได้ตรงกับความต้องการ</div>
                         <div class="rating-options">
                             <div class="col"><input type="radio" name="q3_4" value="5" required><span class="mobile-rating-label">มากที่สุด (5)</span></div>
@@ -218,7 +186,7 @@
                             <div class="col"><input type="radio" name="q3_4" value="1"><span class="mobile-rating-label">น้อยที่สุด (1)</span></div>
                         </div>
                     </div>
-                       <div class="rating-row">
+                     <div class="rating-row">
                         <div class="rating-question">3.5 เทคนิคที่วิทยากรสอน สามารถนำไปใช้ได้จริง</div>
                         <div class="rating-options">
                             <div class="col"><input type="radio" name="q3_5" value="5" required><span class="mobile-rating-label">มากที่สุด (5)</span></div>
@@ -226,10 +194,10 @@
                             <div class="col"><input type="radio" name="q3_5" value="1"><span class="mobile-rating-label">น้อยที่สุด (1)</span></div>
                         </div>
                     </div>
-                       <div class="rating-row">
+                     <div class="rating-row">
                         <div class="rating-question">3.6 ความน่าเชื่อถือของวิทยากรในการสอนสี</div>
                         <div class="rating-options">
-                                <div class="col"><input type="radio" name="q3_6" value="5" required><span class="mobile-rating-label">มากที่สุด (5)</span></div>
+                             <div class="col"><input type="radio" name="q3_6" value="5" required><span class="mobile-rating-label">มากที่สุด (5)</span></div>
                             <div class="col"><input type="radio" name="q3_6" value="3"><span class="mobile-rating-label">ปานกลาง (3)</span></div>
                             <div class="col"><input type="radio" name="q3_6" value="1"><span class="mobile-rating-label">น้อยที่สุด (1)</span></div>
                         </div>
@@ -238,7 +206,7 @@
 
                 <h5 class="section-title">4. เทคนิคการสอนของวิทยากร การสอนตัด โดยไม่ใช้เครื่องตัด</h5>
                 <div class="rating-grid">
-                       <div class="rating-row">
+                     <div class="rating-row">
                         <div class="rating-question">4.1 การวิเคราะห์เส้นผมก่อน ตัดซอย โดยไม่ใช้เครื่องตัด</div>
                         <div class="rating-options">
                             <div class="col"><input type="radio" name="q4_1" value="5" required><span class="mobile-rating-label">มากที่สุด (5)</span></div>
@@ -254,7 +222,7 @@
                             <div class="col"><input type="radio" name="q4_2" value="1"><span class="mobile-rating-label">น้อยที่สุด (1)</span></div>
                         </div>
                     </div>
-                       <div class="rating-row">
+                     <div class="rating-row">
                         <div class="rating-question">4.3 เทคนิคที่วิทยากรสอน สามารถนำไปใช้ได้จริง</div>
                         <div class="rating-options">
                             <div class="col"><input type="radio" name="q4_3" value="5" required><span class="mobile-rating-label">มากที่สุด (5)</span></div>
@@ -262,7 +230,7 @@
                             <div class="col"><input type="radio" name="q4_3" value="1"><span class="mobile-rating-label">น้อยที่สุด (1)</span></div>
                         </div>
                     </div>
-                       <div class="rating-row">
+                     <div class="rating-row">
                         <div class="rating-question">4.4 ความน่าเชื่อถือของวิทยากรในการสอนตัดโดยไม่ใช้เครื่อง</div>
                         <div class="rating-options">
                             <div class="col"><input type="radio" name="q4_4" value="5" required><span class="mobile-rating-label">มากที่สุด (5)</span></div>
@@ -298,15 +266,6 @@
                 <div class="form-group"><label for="reason">เหตุผล (ถ้ามี)</label><textarea class="form-control" id="reason" name="เหตุผล" rows="2"></textarea></div>
                 <div class="form-group"><label for="suggestion">ข้อเสนอแนะและความคิดเห็นเพิ่มเติม</label><textarea class="form-control" id="suggestion" name="ข้อเสนอแนะ" rows="3"></textarea></div>
                 
-                <div class="form-group">
-                    <label for="imageUpload">แนบรูปภาพ (ถ้ามี)</label>
-                    <input type="file" class="form-control-file" id="imageUpload" name="imageFiles" multiple accept="image/*">
-                </div>
-                <div class="form-group">
-                    <label for="videoUpload">แนบวิดีโอ (ถ้ามี)</label>
-                    <input type="file" class="form-control-file" id="videoUpload" name="videoFiles" multiple accept="video/*">
-                </div>
-
                 <div class="text-center mt-4"><button type="submit" class="btn btn-primary btn-lg">ส่งแบบประเมิน</button></div>
             </div>
         </form>
@@ -314,14 +273,10 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyX2UzKDl9RjfejgYoihATmFEen6LZx6CO4U5DYCwLBLldBGf8x1FXDfYo6qrvfzRAI/exec'; 
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyrRNDI0WWLwkYHM5we4jsk9mttOgptM5R4dJf7eB_TxPtXKIT5vKtBtsf7TQruKiEf/exec'; 
     const form = document.forms['evaluation-sheet'];
-    
-    // Element ของหน้าต่าง Loading
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    const loadingText = document.getElementById('loadingText');
-    
     async function main() {
         await liff.init({ liffId: "2008243853-A2X0rv36" });
         if (!liff.isLoggedIn()) { liff.login(); } 
@@ -332,7 +287,6 @@
         }
     }
     main();
-
     function fetchUserData(userId) {
         const url = `${scriptURL}?action=getUserData&userId=${userId}`;
         fetch(url).then(res => res.json()).then(data => {
@@ -349,17 +303,15 @@
                 loadingAlert.textContent = 'พบข้อมูลการลงทะเบียนของคุณแล้ว';
             } else {
                 loadingAlert.className = 'alert alert-warning';
-                loadingAlert.textContent = 'ไม่พบข้อมูลการลงทะเบียน กรุณากรอกข้อมูลผู้ประเมินด้วยตนเอง';
+                loadingAlert.textContent = 'ไม่พบข้อมูลการลงทะเบียน กรุณากรอกข้อมูลผู้ประเมิน';
                 $('#userInfoSection input').prop('readonly', false);
             }
         }).catch(err => {
             console.error('Error fetching user data:', err);
             $('#loading-alert').className = 'alert alert-danger';
             $('#loading-alert').textContent = 'เกิดข้อผิดพลาดในการดึงข้อมูล';
-            $('#userInfoSection input').prop('readonly', false);
         });
     }
-
     function calculateScore() {
         let finalScore = 0;
         $('input[type="radio"][name^="q"]:checked').each(function() {
@@ -369,65 +321,16 @@
         $('#hiddenFinalScore').val(finalScore);
     }
     $('input[type="radio"]').on('change', calculateScore);
-
-    // =========== แก้ไขฟังก์ชัน Submit ใหม่ทั้งหมด ===========
     form.addEventListener('submit', e => {
         e.preventDefault();
-        
-        loadingText.textContent = 'กำลังประมวลผลไฟล์...';
-        loadingOverlay.style.display = 'flex';
-
-        const readFile = (file) => {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = (event) => resolve({ name: file.name, type: file.type, data: event.target.result });
-                reader.onerror = (error) => reject(error);
-                reader.readAsDataURL(file);
-            });
-        };
-
-        const imageFiles = document.getElementById('imageUpload').files;
-        const videoFiles = document.getElementById('videoUpload').files;
-
-        const imagePromises = Array.from(imageFiles).map(readFile);
-        const videoPromises = Array.from(videoFiles).map(readFile);
-
-        Promise.all([...imagePromises, ...videoPromises]).then(filesData => {
-            const images = filesData.slice(0, imagePromises.length);
-            const videos = filesData.slice(imagePromises.length);
-
-            const formData = new FormData(form);
-            const dataObject = {};
-            formData.forEach((value, key) => { dataObject[key] = value; });
-
-            const payload = { ...dataObject, images, videos };
-
-            loadingText.textContent = 'กำลังส่งข้อมูล...';
-
-            fetch(scriptURL, {
-                method: 'POST',
-                body: JSON.stringify(payload),
-                headers: { 'Content-Type': 'text/plain' } // <<<<<<<<<<<< ***** จุดที่แก้ไข *****
-            })
-            .then(response => response.json())
-            .then(data => {
-                loadingOverlay.style.display = 'none'; // ซ่อนหน้าต่างโหลด
-                if (data.result === 'success') {
-                    alert('ส่งแบบประเมินสำเร็จ! ขอบคุณสำหรับความคิดเห็นของคุณ');
-                    if (liff.isInClient()) {
-                        liff.closeWindow();
-                    }
-                } else { 
-                    throw new Error(data.error); 
-                }
-            })
-            .catch(error => {
-                loadingOverlay.style.display = 'none'; // ซ่อนหน้าต่างโหลด
-                alert(`เกิดข้อผิดพลาด! ไม่สามารถบันทึกข้อมูลได้: ${error.message}`);
-            });
+        Swal.fire({ title: 'กำลังส่งข้อมูล...', text: 'กรุณารอสักครู่', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) }).then(response => response.json()).then(data => {
+            if (data.result === 'success') {
+                Swal.fire({ icon: 'success', title: 'ส่งแบบประเมินสำเร็จ!', text: 'ขอบคุณสำหรับความคิดเห็นของคุณ', showConfirmButton: false, timer: 2500 })
+                .then(() => { if (liff.isInClient()) { liff.closeWindow(); } });
+            } else { throw new Error(data.error); }
         }).catch(error => {
-            loadingOverlay.style.display = 'none'; // ซ่อนหน้าต่างโหลด
-            alert(`เกิดข้อผิดพลาด! ไม่สามารถอ่านไฟล์ได้: ${error.message}`);
+            Swal.fire('เกิดข้อผิดพลาด!', `ไม่สามารถบันทึกข้อมูลได้: ${error.message}`, 'error');
         });
     });
 </script>
