@@ -273,6 +273,7 @@
                     <label for="videoUpload">แนบวิดีโอ</label>
                     <input type="file" class="form-control-file" id="videoUpload" name="videoUpload" accept="video/*">
                 </div>
+
                 <div class="text-center mt-4"><button type="submit" class="btn btn-primary btn-lg">ส่งแบบประเมิน</button></div>
             </div>
         </form>
@@ -282,22 +283,35 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    // ... (ส่วน JavaScript อื่นๆ เหมือนเดิมทั้งหมด) ...
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxJz2xucm0-Wboimk7GiIuFRAIrIJ4yHbrl53uPAnjT3uN52bPygPX7eA1rxeGff5MT/exec'; // <--- อย่าลืมใส่ URL ของสคริปต์หลัง Deploy ใหม่
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxgkmjDtuA3GG7f0PS9KkqS-bOyT2_0SrWtDlZ9UyhXqmhBdmvCGf7VOn-wyrOgjNWP/exec'; 
     const form = document.forms['evaluation-sheet'];
+    
     async function main() {
         await liff.init({ liffId: "2008243853-A2X0rv36" });
-        if (!liff.isLoggedIn()) { liff.login(); } 
-        else {
+        if (!liff.isLoggedIn()) {
+            liff.login();
+        } else {
             const profile = await liff.getProfile();
             document.getElementById('userID').value = profile.userId;
             fetchUserData(profile.userId);
         }
     }
     main();
+
+    // ======================= ฟังก์ชันที่แก้ไข =======================
     function fetchUserData(userId) {
-        const url = `${scriptURL}?action=getUserData&userId=${userId}`;
-        fetch(url).then(res => res.json()).then(data => {
+        // สร้างข้อมูลที่จะส่งไปใน Body
+        const formData = new FormData();
+        formData.append('action', 'getUserData'); // กำหนด action เพื่อให้ Apps Script รู้ว่าเราต้องการทำอะไร
+        formData.append('userId', userId);
+
+        // ส่ง Request แบบ POST ไปยัง scriptURL
+        fetch(scriptURL, {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
             const loadingAlert = document.getElementById('loading-alert');
             if (data.found) {
                 $('#fullName').val(data.fullName);
@@ -320,6 +334,8 @@
             $('#loading-alert').textContent = 'เกิดข้อผิดพลาดในการดึงข้อมูล';
         });
     }
+    // ==========================================================
+
     function calculateScore() {
         let finalScore = 0;
         $('input[type="radio"][name^="q"]:checked').each(function() {
@@ -333,7 +349,11 @@
     form.addEventListener('submit', e => {
         e.preventDefault();
         Swal.fire({ title: 'กำลังส่งข้อมูล...', text: 'กรุณารอสักครู่ หากแนบไฟล์ขนาดใหญ่อาจใช้เวลาสักครู่', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
-        fetch(scriptURL, { method: 'POST', body: new FormData(form) }).then(response => response.json()).then(data => {
+        
+        // เราส่งข้อมูลแบบ POST อยู่แล้วในส่วนนี้ ไม่ต้องแก้ไขอะไร
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => response.json())
+        .then(data => {
             if (data.result === 'success') {
                 Swal.fire({ icon: 'success', title: 'ส่งแบบประเมินสำเร็จ!', text: 'ขอบคุณสำหรับความคิดเห็นของคุณ', showConfirmButton: false, timer: 2500 })
                 .then(() => {
